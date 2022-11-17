@@ -63,9 +63,7 @@ custom_theme_horiz <- theme(legend.position = "none",
 ## Data considerations
 
 - This data is provided by [PHIN](https://www.phin.org.uk/data)
-- It's still unknown whether NHS-commissioned treatments delivered by IS are counted as 'private' or 'NHS'
-- It's s still unknown whether purely NHS treatments (commissioned and delivered by NHS) are in scope of the dataset
-- We've reached out to PHIN team w/c 17th October
+- It's still unknown whether NHS-commissioned treatments delivered by IS are counted as 'private' or 'NHS' - probably counted as NHS, given this is pulled from HES
 - There are concerns with data quality, with low reporting (which may not be random)
 
 ## Key points
