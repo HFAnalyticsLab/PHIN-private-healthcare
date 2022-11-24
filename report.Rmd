@@ -290,7 +290,7 @@ vol_consultant_proc <- plyr::rbind.fill(vol_consultant_proc_2021,vol_consultant_
          year=case_when(period_from=="2021-04-01"&period_to=="2022-03-31" ~ "20212022",
                         period_from=="2020-04-01"&period_to=="2021-03-31" ~ "20202021",
                         TRUE ~ "NA")) %>%
-  mutate(.,total_episodes_num=rowSums(across(ends_with("_num"))),
+  mutate(.,total_episodes_num=rowSums(across(ends_with("_num")),na.rm=TRUE),
          nhs_to_private_episodes=nhs_episodes_num/private_episodes_num) %>%
   mutate(
     pct_private=private_episodes_num/total_episodes_num*100,

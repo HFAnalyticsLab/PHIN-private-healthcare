@@ -34,6 +34,10 @@ PHIN_subfolder <- "/Private healthcare"
 R_workbench <- path.expand("~")
 localgit <- dirname(rstudioapi::getSourceEditorContext()$path)
 
+#Import data
+
+source('0. Import data.R')
+
 #Theme
 
 custom_theme <- theme(panel.border = element_blank(),
@@ -48,20 +52,16 @@ custom_theme <- theme(panel.border = element_blank(),
                       axis.title.y = element_text(size = 10))
 
 custom_theme_horiz <- theme(legend.position = "none",
-                      panel.border = element_blank(),
-                      strip.text = element_text(size=10),
-                      text = element_text(size = 10),
-                      legend.title=element_text(size=10),
-                      legend.text=element_text(size=10),
-                      axis.text = element_text(size = 10),
-                      axis.text.y = element_text(size = 10),
-                      axis.text.x = element_text(angle = 0, hjust = 1,size = 10),
-                      axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size = 10),
-                      axis.title.y = element_text(size = 10))
-
-#Import data
-
-source('0. Import data.R')
+                            panel.border = element_blank(),
+                            strip.text = element_text(size=10),
+                            text = element_text(size = 10),
+                            legend.title=element_text(size=10),
+                            legend.text=element_text(size=10),
+                            axis.text = element_text(size = 10),
+                            axis.text.y = element_text(size = 10),
+                            axis.text.x = element_text(angle = 0, hjust = 1,size = 10),
+                            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size = 10),
+                            axis.title.y = element_text(size = 10))
 
 ##############################################
 ################### By site ##################
@@ -296,7 +296,7 @@ vol_consultant_proc <- plyr::rbind.fill(vol_consultant_proc_2021,vol_consultant_
          year=case_when(period_from=="2021-04-01"&period_to=="2022-03-31" ~ "20212022",
                         period_from=="2020-04-01"&period_to=="2021-03-31" ~ "20202021",
                         TRUE ~ "NA")) %>%
-  mutate(.,total_episodes_num=rowSums(across(ends_with("_num"))),
+  mutate(.,total_episodes_num=rowSums(across(ends_with("_num")),na.rm=TRUE),
          nhs_to_private_episodes=nhs_episodes_num/private_episodes_num) %>%
   mutate(
     pct_private=private_episodes_num/total_episodes_num*100,
