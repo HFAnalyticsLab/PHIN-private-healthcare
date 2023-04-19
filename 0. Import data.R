@@ -67,11 +67,25 @@ vol_consultant_proc_2122 <-  s3read_using(read_excel,
                                           bucket = IHT_bucket) %>%
   janitor::clean_names()
 
+vol_consultant_and_procedure_2122 <-  s3read_using(read_excel,
+                                          object = paste0(PHIN_subfolder,"/Volume and length of stay/Consultant/Volume and Length of Stay - Consultant (1 Apr 21 - 31 Mar 22).xlsx"), # File to open
+                                          sheet="Vol by Consultant and Proc",
+                                          skip=11,
+                                          bucket = IHT_bucket) %>%
+  janitor::clean_names()
+
 vol_consultant_proc_2021 <-  s3read_using(read_excel,
                                  object = paste0(PHIN_subfolder,"/Volume and length of stay/Consultant/Volume and Length of Stay - Consultant (1 April 2020 - 31 March 2021).xlsx"), # File to open
                                  sheet="Vol by Consultant",
                                  skip=11,
                                  bucket = IHT_bucket) %>%
+  janitor::clean_names()
+
+vol_consultant_and_procedure_2021 <-  s3read_using(read_excel,
+                                          object = paste0(PHIN_subfolder,"/Volume and length of stay/Consultant/Volume and Length of Stay - Consultant (1 April 2020 - 31 March 2021).xlsx"), # File to open
+                                          sheet="Vol by Consultant and Proc",
+                                          skip=11,
+                                          bucket = IHT_bucket) %>%
   janitor::clean_names()
 
 #################################################
@@ -90,4 +104,20 @@ los_nation_proc_2021 <-  s3read_using(read_excel,
                                       sheet="LoS by Nation by Proc - 1",
                                       skip=9,
                                       bucket = IHT_bucket) %>%
+  janitor::clean_names()
+
+#########################################
+################### SU ##################
+#########################################
+
+su_consultants <-  s3read_using(fread,
+                                      object = paste0(PHIN_subfolder,"/consultantNhsEpisodesSpells_SUS_221209.csv"), # File to open
+                                      header=TRUE,
+                                      bucket = IHT_bucket) %>%
+  janitor::clean_names()
+
+su_consultants_procedure <-  s3read_using(fread,
+                                object = paste0(PHIN_subfolder,"/consultantNhsEpisodesSpells_selectedProcedures_SUS_221209.csv"), # File to open
+                                header=TRUE,
+                                bucket = IHT_bucket) %>%
   janitor::clean_names()
